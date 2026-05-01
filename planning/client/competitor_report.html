@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Competitive Intelligence — Two Shades of Travel</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Lato:wght@300;400;700&display=swap');
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --primary:    #5A5F3C;
+    --secondary:  #C89A3D;
+    --accent:     #D8C6A8;
+    --surface:    #F2EFEA;
+    --on-surface: #111111;
+    --white:      #FFFFFF;
+    --danger:     #B3261E;
+    --success:    #2E6B3E;
+    --radius:     12px;
+    --font-display: 'Cormorant Garamond', Georgia, serif;
+    --font-body:    'Lato', system-ui, sans-serif;
+  }
+
+  body {
+    background: var(--surface);
+    color: var(--on-surface);
+    font-family: var(--font-body);
+    line-height: 1.65;
+  }
+
+  /* ── Cover ──────────────────────────────────────────────── */
+  .cover {
+    min-height: 100vh;
+    background: var(--primary);
+    color: var(--white);
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    text-align: center;
+    padding: 60px 40px;
+    page-break-after: always;
+  }
+  .cover .eyebrow {
+    font-family: var(--font-body);
+    font-size: 10px; letter-spacing: 4px;
+    text-transform: uppercase; opacity: 0.55;
+    margin-bottom: 28px;
+  }
+  .cover h1 {
+    font-family: var(--font-display);
+    font-size: clamp(36px, 6vw, 68px);
+    font-weight: 300; line-height: 1.1;
+    margin-bottom: 16px;
+  }
+  .cover .subtitle {
+    font-family: var(--font-display);
+    font-size: 20px; font-style: italic;
+    opacity: 0.7; margin-bottom: 48px;
+  }
+  .cover .divider { width: 50px; height: 1px; background: rgba(255,255,255,0.25); margin: 0 auto 28px; }
+  .cover .meta { font-size: 11px; letter-spacing: 2px; text-transform: uppercase; opacity: 0.45; }
+
+  /* ── Section ────────────────────────────────────────────── */
+  .section {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 72px 40px;
+    page-break-before: always;
+  }
+  .section-label {
+    font-size: 10px; letter-spacing: 4px;
+    text-transform: uppercase; color: var(--primary);
+    opacity: 0.55; margin-bottom: 12px;
+  }
+  .section-title {
+    font-family: var(--font-display);
+    font-size: 34px; font-weight: 400;
+    border-bottom: 1px solid var(--accent);
+    padding-bottom: 18px; margin-bottom: 36px;
+  }
+
+  /* ── Competitor cards ───────────────────────────────────── */
+  .competitor-card {
+    background: var(--white);
+    border-radius: var(--radius);
+    border: 1px solid var(--accent);
+    padding: 36px;
+    margin-bottom: 24px;
+  }
+  .comp-header {
+    display: flex; align-items: flex-start;
+    justify-content: space-between; gap: 20px;
+    margin-bottom: 20px;
+  }
+  .comp-rank {
+    font-family: var(--font-display);
+    font-size: 52px; font-weight: 300;
+    color: var(--accent); line-height: 1;
+    flex-shrink: 0;
+  }
+  .comp-title-block { flex: 1; }
+  .comp-name {
+    font-family: var(--font-display);
+    font-size: 26px; font-weight: 600;
+    color: var(--on-surface); margin-bottom: 4px;
+  }
+  .comp-url {
+    font-size: 11px; color: var(--primary);
+    letter-spacing: 1px; text-transform: lowercase;
+  }
+  .comp-positioning {
+    font-family: var(--font-display);
+    font-size: 16px; font-style: italic;
+    color: var(--on-surface); opacity: 0.7;
+    border-left: 3px solid var(--primary);
+    padding-left: 14px; margin-bottom: 20px;
+  }
+  .comp-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    margin-bottom: 20px;
+  }
+  .comp-attr { font-size: 13px; }
+  .comp-attr strong {
+    display: block;
+    font-size: 10px; letter-spacing: 2px;
+    text-transform: uppercase; color: var(--primary);
+    margin-bottom: 4px;
+  }
+  .comp-gap {
+    background: #FFF8EC;
+    border: 1px solid var(--secondary);
+    border-radius: 8px;
+    padding: 14px 18px;
+    font-size: 13px;
+  }
+  .comp-gap strong {
+    font-size: 10px; letter-spacing: 2px;
+    text-transform: uppercase; color: var(--secondary);
+    display: block; margin-bottom: 4px;
+  }
+  .tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 6px; }
+  .tag {
+    background: var(--surface);
+    border: 1px solid var(--accent);
+    font-size: 11px; padding: 4px 10px;
+    border-radius: 99px; color: var(--on-surface);
+  }
+
+  /* ── Blueprint ──────────────────────────────────────────── */
+  .blueprint-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 18px;
+  }
+  .blueprint-card {
+    background: var(--white);
+    border-radius: var(--radius);
+    border: 1px solid var(--accent);
+    padding: 28px;
+  }
+  .blueprint-card .bp-icon {
+    font-size: 28px; margin-bottom: 12px;
+  }
+  .blueprint-card .bp-title {
+    font-family: var(--font-display);
+    font-size: 20px; font-weight: 600;
+    color: var(--primary); margin-bottom: 12px;
+  }
+  .blueprint-card ul {
+    list-style: none;
+    padding: 0;
+  }
+  .blueprint-card ul li {
+    font-size: 13px;
+    padding: 5px 0;
+    border-bottom: 1px solid var(--surface);
+    display: flex; gap: 8px; align-items: flex-start;
+  }
+  .blueprint-card ul li:last-child { border-bottom: none; }
+  .blueprint-card ul li::before {
+    content: '→';
+    color: var(--secondary);
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  /* ── Opportunities ──────────────────────────────────────── */
+  .opp-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+  }
+  .opp-table th {
+    background: var(--primary);
+    color: var(--white);
+    padding: 14px 20px;
+    text-align: left;
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-weight: 400;
+  }
+  .opp-table th:first-child { border-radius: var(--radius) 0 0 0; }
+  .opp-table th:last-child  { border-radius: 0 var(--radius) 0 0; }
+  .opp-table td {
+    padding: 16px 20px;
+    border-bottom: 1px solid var(--accent);
+    vertical-align: top; line-height: 1.5;
+  }
+  .opp-table tr:last-child td { border-bottom: none; }
+  .opp-table tr:nth-child(even) td { background: rgba(255,255,255,0.6); }
+  .opp-table .gap-col { color: #888; font-style: italic; }
+  .opp-table .tst-col { color: var(--success); font-weight: 700; }
+
+  /* ── Positioning map ────────────────────────────────────── */
+  .map-container {
+    background: var(--white);
+    border: 1px solid var(--accent);
+    border-radius: var(--radius);
+    padding: 40px;
+    position: relative;
+    height: 420px;
+    overflow: hidden;
+  }
+  .map-axis-x {
+    position: absolute;
+    bottom: 50%; left: 20px; right: 20px;
+    height: 1px; background: var(--accent);
+  }
+  .map-axis-y {
+    position: absolute;
+    left: 50%; top: 20px; bottom: 20px;
+    width: 1px; background: var(--accent);
+  }
+  .map-label-top    { position: absolute; top: 8px; left: 50%; transform: translateX(-50%); font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--primary); }
+  .map-label-bottom { position: absolute; bottom: 8px; left: 50%; transform: translateX(-50%); font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--primary); }
+  .map-label-left   { position: absolute; left: 8px; top: 50%; transform: translateY(-50%); font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--primary); writing-mode: vertical-rl; text-orientation: mixed; }
+  .map-label-right  { position: absolute; right: 8px; top: 50%; transform: translateY(-50%); font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--primary); writing-mode: vertical-rl; text-orientation: mixed; transform: translateY(-50%) rotate(180deg); }
+  .map-dot {
+    position: absolute;
+    width: 12px; height: 12px;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+  }
+  .map-dot-label {
+    position: absolute;
+    font-size: 11px;
+    font-family: var(--font-body);
+    white-space: nowrap;
+    transform: translate(-50%, 8px);
+    color: var(--on-surface);
+    font-weight: 700;
+  }
+  .dot-comp { background: var(--accent); border: 2px solid var(--secondary); }
+  .dot-tst  { background: var(--primary); border: 2px solid var(--primary); width: 16px; height: 16px; }
+  .dot-tst-label { color: var(--primary); font-size: 12px; }
+
+  /* ── Recommendations ────────────────────────────────────── */
+  .rec-list { list-style: none; padding: 0; }
+  .rec-list li {
+    display: flex; gap: 18px; align-items: flex-start;
+    padding: 20px 0;
+    border-bottom: 1px solid var(--accent);
+    font-size: 14px;
+  }
+  .rec-list li:last-child { border-bottom: none; }
+  .rec-num {
+    font-family: var(--font-display);
+    font-size: 32px; font-weight: 300;
+    color: var(--accent); line-height: 1;
+    flex-shrink: 0; width: 36px;
+  }
+  .rec-body strong {
+    display: block;
+    font-size: 14px; font-weight: 700;
+    color: var(--on-surface); margin-bottom: 4px;
+  }
+  .rec-body span { color: #555; font-size: 13px; }
+
+  /* ── Print ──────────────────────────────────────────────── */
+  @media print {
+    .no-print { display: none; }
+    body { background: white; }
+    .section { page-break-before: always; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ── Cover ──────────────────────────────────────────────── -->
+<div class="cover">
+  <p class="eyebrow">Prepared by Raspucat · May 2026</p>
+  <h1>Competitive<br>Intelligence</h1>
+  <p class="subtitle">Two Shades of Travel</p>
+  <div class="divider"></div>
+  <p class="meta">Family Travel Blog &amp; Content Brand · Liberty Hill, TX</p>
+</div>
+
+<!-- ── Competitor Profiles ────────────────────────────────── -->
+<div class="section">
+  <p class="section-label">Section 01</p>
+  <h2 class="section-title">Top 5 Competitor Profiles</h2>
+
+  <!-- Competitor 1 -->
+  <div class="competitor-card">
+    <div class="comp-header">
+      <div class="comp-rank">01</div>
+      <div class="comp-title-block">
+        <div class="comp-name">World Travel Family</div>
+        <div class="comp-url">worldtravelfamily.com</div>
+      </div>
+    </div>
+    <p class="comp-positioning">"The Most Inspiring Family Travel Blog" — long-form destination guides, worldschooling, 60+ countries.</p>
+    <div class="comp-grid">
+      <div class="comp-attr"><strong>Trust Signals</strong>Operating since 2012 · 60+ countries · 6 years full-time travel</div>
+      <div class="comp-attr"><strong>Content Pillars</strong>Destination guides · Worldschooling · Gear reviews · Budget strategies</div>
+      <div class="comp-attr"><strong>Monetization</strong>Affiliate (Amazon, Skyscanner, VRBO, World Nomads)</div>
+      <div class="comp-attr"><strong>Primary CTA</strong>Newsletter subscription · "Work With Us"</div>
+    </div>
+    <div class="comp-gap">
+      <strong>Gap vs. Two Shades of Travel</strong>
+      Targets experienced and full-time traveler families. No multicultural lens. No beginner-focused entry point. Gen X skew vs. TSoT's Millennial audience.
+    </div>
+  </div>
+
+  <!-- Competitor 2 -->
+  <div class="competitor-card">
+    <div class="comp-header">
+      <div class="comp-rank">02</div>
+      <div class="comp-title-block">
+        <div class="comp-name">A Mom Explores</div>
+        <div class="comp-url">emilymkrause.com</div>
+      </div>
+    </div>
+    <p class="comp-positioning">"Family Travel Tips, Destination Guides with Kids, Family Vacation Ideas" — USA-first, theme park heavy.</p>
+    <div class="comp-grid">
+      <div class="comp-attr"><strong>Trust Signals</strong>Mom of 4 · Photographer · Multi-platform (IG, YT, TikTok, Pinterest)</div>
+      <div class="comp-attr"><strong>Content Pillars</strong>Disney · National parks · Road trips · Florida/USA · Packing</div>
+      <div class="comp-attr"><strong>Monetization</strong>Amazon affiliate · Travel planner product · eBook · Sponsored content</div>
+      <div class="comp-attr"><strong>Primary CTA</strong>Shop · Podcast subscription</div>
+    </div>
+    <div class="comp-gap">
+      <strong>Gap vs. Two Shades of Travel</strong>
+      Disney-heavy content skews toward domestic tourism. No cultural curiosity or global adventurousness. Generic mom-blog tone with no standout editorial voice.
+    </div>
+  </div>
+
+  <!-- Competitor 3 -->
+  <div class="competitor-card">
+    <div class="comp-header">
+      <div class="comp-rank">03</div>
+      <div class="comp-title-block">
+        <div class="comp-name">The Global Wizards</div>
+        <div class="comp-url">theglobalwizards.com</div>
+      </div>
+    </div>
+    <p class="comp-positioning">"Live the family life you always dreamed of" — digital nomad lifestyle aspiration, alternative family travel.</p>
+    <div class="comp-grid">
+      <div class="comp-attr"><strong>Trust Signals</strong>Named Belgian family · 25+ country guides · Brand collaboration page</div>
+      <div class="comp-attr"><strong>Content Pillars</strong>Asia · Europe · Africa · Van life · Digital nomad · Printables</div>
+      <div class="comp-attr"><strong>Monetization</strong>E-commerce shop · Affiliate · Brand partnerships</div>
+      <div class="comp-attr"><strong>Primary CTA</strong>"Find out how we can help your business" · Shop</div>
+    </div>
+    <div class="comp-gap">
+      <strong>Gap vs. Two Shades of Travel</strong>
+      Positions around fantasy/lifestyle change — doesn't serve overwhelmed mainstream parents who want practical first steps. European origin, limited US reach.
+    </div>
+  </div>
+
+  <!-- Competitor 4 -->
+  <div class="competitor-card">
+    <div class="comp-header">
+      <div class="comp-rank">04</div>
+      <div class="comp-title-block">
+        <div class="comp-name">Trips With Tykes</div>
+        <div class="comp-url">tripswithtykes.com</div>
+      </div>
+    </div>
+    <p class="comp-positioning">"Simplify traveling with kids of all ages" — logistics-first, deep Disney and air travel expertise.</p>
+    <div class="comp-grid">
+      <div class="comp-attr"><strong>Trust Signals</strong>Leslie Harvey, SF Bay Area mom · AI-free badge · 8 social platforms · 33+ deep guides</div>
+      <div class="comp-attr"><strong>Content Pillars</strong>Air travel · Disney parks · California · National parks · Packing lists</div>
+      <div class="comp-attr"><strong>Monetization</strong>Amazon affiliate · DVC affiliate · Media kit</div>
+      <div class="comp-attr"><strong>Primary CTA</strong>Newsletter (flight deals) · Social follow</div>
+    </div>
+    <div class="comp-gap">
+      <strong>Gap vs. Two Shades of Travel</strong>
+      Hyper-niche: Disney + California logistics. No multicultural POV. Bay Area/California geographic bias. Dry, checklist tone vs. TSoT's warm storytelling brand.
+    </div>
+  </div>
+
+  <!-- Competitor 5 -->
+  <div class="competitor-card">
+    <div class="comp-header">
+      <div class="comp-rank">05</div>
+      <div class="comp-title-block">
+        <div class="comp-name">TraveLynn Family</div>
+        <div class="comp-url">travelynnfamily.com</div>
+      </div>
+    </div>
+    <p class="comp-positioning">"Don't wait to travel with your kids until they're the perfect age!" — urgency-driven, encouragement-led.</p>
+    <div class="comp-grid">
+      <div class="comp-attr"><strong>Trust Signals</strong>27k IG · 14k Facebook · 200k monthly page views · 8+ years active (since 2016)</div>
+      <div class="comp-attr"><strong>Content Pillars</strong>Asia · Europe · Africa · Worldschooling · Slow travel · Multi-generational</div>
+      <div class="comp-attr"><strong>Monetization</strong>Amazon affiliate · Buy Me a Coffee · Paid 1:1 consulting (TraveLynn Chat)</div>
+      <div class="comp-attr"><strong>Primary CTA</strong>Book a consultation · Newsletter</div>
+    </div>
+    <div class="comp-gap">
+      <strong>Gap vs. Two Shades of Travel</strong>
+      UK-centric audience and voice. No US market hook. No cultural diversity angle. Modest social following compared to growth potential of a US-based, culturally-forward brand.
+    </div>
+  </div>
+</div>
+
+<!-- ── The Blueprint ──────────────────────────────────────── -->
+<div class="section">
+  <p class="section-label">Section 02</p>
+  <h2 class="section-title">The Blueprint — What Winners Share</h2>
+  <div class="blueprint-grid">
+
+    <div class="blueprint-card">
+      <div class="bp-icon">📸</div>
+      <div class="bp-title">Visual Patterns</div>
+      <ul>
+        <li>Full-bleed destination photography above the fold</li>
+        <li>Real family faces front and center — not stock photos</li>
+        <li>Warm, earthy color palettes that feel adventurous but approachable</li>
+        <li>Organized nav by destination region or child age/stage</li>
+        <li>Polaroid-style or editorial family candids build intimacy</li>
+      </ul>
+    </div>
+
+    <div class="blueprint-card">
+      <div class="bp-icon">🏆</div>
+      <div class="bp-title">Trust Signal Stack</div>
+      <ul>
+        <li>Named person/family (not a faceless brand)</li>
+        <li>Years active + countries/states visited counter</li>
+        <li>Multi-platform social presence (min: IG + Pinterest + YouTube)</li>
+        <li>Monthly traffic number or newsletter milestone</li>
+        <li>"As seen in" press logos — even one dramatically lifts credibility</li>
+        <li>Niche expertise badge (AI-free, certified, award-winner)</li>
+      </ul>
+    </div>
+
+    <div class="blueprint-card">
+      <div class="bp-icon">📣</div>
+      <div class="bp-title">CTA Architecture</div>
+      <ul>
+        <li><strong>Primary:</strong> Email newsletter capture — every winner prioritizes this</li>
+        <li><strong>Secondary:</strong> "Work with me" / brand collaboration page</li>
+        <li><strong>Tertiary:</strong> Shop — planner, guide, or eBook product</li>
+        <li><strong>Premium:</strong> Paid 1:1 consultation (highest trust signal)</li>
+      </ul>
+    </div>
+
+    <div class="blueprint-card">
+      <div class="bp-icon">✍️</div>
+      <div class="bp-title">Content That Drives Traffic</div>
+      <ul>
+        <li>2000+ word destination guides with age-specific angles</li>
+        <li>Disney/theme park content (massive search volume)</li>
+        <li>National park family guides</li>
+        <li>Packing lists and gear reviews (affiliate-monetized)</li>
+        <li>Budget travel strategies and trip cost breakdowns</li>
+        <li>"First time in X" guides — high search intent, underserved</li>
+      </ul>
+    </div>
+
+    <div class="blueprint-card">
+      <div class="bp-icon">🔍</div>
+      <div class="bp-title">SEO Patterns</div>
+      <ul>
+        <li>Long-form destination guides dominate SERP rankings</li>
+        <li>Listicles build backlinks and referral traffic</li>
+        <li>Pinterest drives significant referral — all top performers use it</li>
+        <li>Seasonal content tied to school breaks (spring, summer, winter)</li>
+        <li>Internal linking between destination + tips content</li>
+      </ul>
+    </div>
+
+    <div class="blueprint-card">
+      <div class="bp-icon">💰</div>
+      <div class="bp-title">Monetization Stack</div>
+      <ul>
+        <li>Amazon Associates affiliate (all top performers)</li>
+        <li>Travel service affiliates (Skyscanner, booking, insurance)</li>
+        <li>Sponsored content / brand partnerships</li>
+        <li>Digital products (planners, eBooks, itineraries)</li>
+        <li>1:1 consulting / trip planning services (highest margin)</li>
+      </ul>
+    </div>
+
+  </div>
+</div>
+
+<!-- ── Competitive Opportunities ──────────────────────────── -->
+<div class="section">
+  <p class="section-label">Section 03</p>
+  <h2 class="section-title">Where Two Shades of Travel Wins</h2>
+  <table class="opp-table">
+    <thead>
+      <tr>
+        <th>Gap in Market</th>
+        <th>Two Shades of Travel Advantage</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="gap-col">No competitor leads with a multicultural lens or cultural pride as a core identity</td>
+        <td class="tst-col">Bourdain + Palmer brand DNA is a rare, ownable differentiator in this space</td>
+      </tr>
+      <tr>
+        <td class="gap-col">Most blogs target experienced or full-time family travelers</td>
+        <td class="tst-col">The "overwhelmed beginner" Millennial parent niche is wide open and underserved</td>
+      </tr>
+      <tr>
+        <td class="gap-col">Top performers are blog-first and lag on video/social-native content</td>
+        <td class="tst-col">TikTok + Instagram Reels-first strategy has a clear runway before this niche saturates</td>
+      </tr>
+      <tr>
+        <td class="gap-col">No strong Texas / Southern US geographic identity in family travel content</td>
+        <td class="tst-col">Liberty Hill, TX base + Austin metro proximity = local SEO and community hook</td>
+      </tr>
+      <tr>
+        <td class="gap-col">Few brands have built real paid communities or memberships in this niche</td>
+        <td class="tst-col">Newsletter-to-community conversion opportunity at the right audience size</td>
+      </tr>
+      <tr>
+        <td class="gap-col">Most top performers are UK-centric or California-centric</td>
+        <td class="tst-col">US South / Midwest family travel perspective is underrepresented in top search results</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- ── Design Recommendations ────────────────────────────── -->
+<div class="section">
+  <p class="section-label">Section 04</p>
+  <h2 class="section-title">Site Design Recommendations</h2>
+  <ul class="rec-list">
+    <li>
+      <span class="rec-num">01</span>
+      <div class="rec-body">
+        <strong>Full-bleed hero with real family photography</strong>
+        <span>Competitors use immersive destination imagery to set tone immediately. Avoid stock photography — real faces from real trips build the trust no competitor can copy.</span>
+      </div>
+    </li>
+    <li>
+      <span class="rec-num">02</span>
+      <div class="rec-body">
+        <strong>Explicitly own the multicultural angle above the fold</strong>
+        <span>No competitor claims this positioning. A headline like "Real Families. Real Destinations. No Filter." signals the Bourdain+Palmer DNA instantly to the right audience.</span>
+      </div>
+    </li>
+    <li>
+      <span class="rec-num">03</span>
+      <div class="rec-body">
+        <strong>Counter block — trust signals in numbers</strong>
+        <span>Winners show credentials fast: countries visited, trips taken, families helped, years of experience. Add a numerical trust strip within the first scroll.</span>
+      </div>
+    </li>
+    <li>
+      <span class="rec-num">04</span>
+      <div class="rec-body">
+        <strong>Navigate by "who you are" not just destination</strong>
+        <span>Add a self-selection row: First Timer · Weekend Warrior · Full-Time Family. This immediately serves the overwhelmed beginner vs. experienced traveler — no competitor does this.</span>
+      </div>
+    </li>
+    <li>
+      <span class="rec-num">05</span>
+      <div class="rec-body">
+        <strong>Lead with email capture — free planning guide as incentive</strong>
+        <span>Every top performer's #1 asset is their email list. Offer a free "First International Trip with Kids" guide as the lead magnet — directly addresses the overwhelmed beginner pain point.</span>
+      </div>
+    </li>
+    <li>
+      <span class="rec-num">06</span>
+      <div class="rec-body">
+        <strong>Warm earthy palette — already correct, stay the course</strong>
+        <span>The olive (#5A5F3C), ochre (#C89A3D), and linen (#F2EFEA) palette is differentiated from the bright, primary-color blogs that dominate this space. It signals editorial quality.</span>
+      </div>
+    </li>
+    <li>
+      <span class="rec-num">07</span>
+      <div class="rec-body">
+        <strong>Serif typography as editorial authority signal</strong>
+        <span>Cormorant Garamond immediately positions TSoT above the generic blog aesthetic. No top competitor uses this — most default to sans-serif utility fonts.</span>
+      </div>
+    </li>
+  </ul>
+</div>
+
+</body>
+</html>

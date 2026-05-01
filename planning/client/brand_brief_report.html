@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Brand Brief — Two Shades of Travel</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Lato:wght@300;400;700&display=swap');
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --primary: #5A5F3C;
+    --secondary: #C89A3D;
+    --accent: #D8C6A8;
+    --surface: #F2EFEA;
+    --on-surface: #111111;
+    --on-primary: #FFFFFF;
+    --radius: 12px;
+    --font-display: 'Cormorant Garamond', Georgia, serif;
+    --font-body: 'Lato', system-ui, sans-serif;
+  }
+
+  body {
+    background: var(--surface);
+    color: var(--on-surface);
+    font-family: var(--font-body);
+    line-height: 1.6;
+  }
+
+  /* ── Cover ────────────────────────────────────────────────── */
+  .cover {
+    min-height: 100vh;
+    background: var(--primary);
+    color: var(--on-primary);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 60px 40px;
+    page-break-after: always;
+  }
+  .cover .eyebrow {
+    font-family: var(--font-body);
+    font-size: 11px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    opacity: 0.6;
+    margin-bottom: 24px;
+  }
+  .cover h1 {
+    font-family: var(--font-display);
+    font-size: clamp(42px, 8vw, 80px);
+    font-weight: 300;
+    line-height: 1.1;
+    margin-bottom: 20px;
+  }
+  .cover .subtitle {
+    font-family: var(--font-display);
+    font-size: 22px;
+    font-weight: 300;
+    font-style: italic;
+    opacity: 0.75;
+    margin-bottom: 60px;
+  }
+  .cover .meta {
+    font-family: var(--font-body);
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    opacity: 0.5;
+  }
+  .cover .divider {
+    width: 60px;
+    height: 1px;
+    background: rgba(255,255,255,0.3);
+    margin: 30px auto;
+  }
+
+  /* ── Section wrapper ──────────────────────────────────────── */
+  .section {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 80px 40px;
+    page-break-before: always;
+  }
+  .section-label {
+    font-family: var(--font-body);
+    font-size: 10px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--primary);
+    opacity: 0.6;
+    margin-bottom: 16px;
+  }
+  .section-title {
+    font-family: var(--font-display);
+    font-size: 36px;
+    font-weight: 400;
+    color: var(--on-surface);
+    margin-bottom: 40px;
+    border-bottom: 1px solid var(--accent);
+    padding-bottom: 20px;
+  }
+
+  /* ── Business Identity ────────────────────────────────────── */
+  .identity-card {
+    background: var(--primary);
+    color: var(--on-primary);
+    border-radius: var(--radius);
+    padding: 48px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .identity-card .biz-type {
+    font-family: var(--font-body);
+    font-size: 12px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    opacity: 0.6;
+  }
+  .identity-card .biz-name {
+    font-family: var(--font-display);
+    font-size: 52px;
+    font-weight: 300;
+    line-height: 1.1;
+  }
+  .identity-card .biz-desc {
+    font-family: var(--font-body);
+    font-size: 14px;
+    opacity: 0.7;
+    margin-top: 8px;
+    text-transform: capitalize;
+    letter-spacing: 1px;
+  }
+
+  /* ── Brand Feeling ────────────────────────────────────────── */
+  .words-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+  .word-card {
+    background: white;
+    border: 2px solid var(--primary);
+    border-radius: var(--radius);
+    padding: 40px 24px;
+    text-align: center;
+  }
+  .word-card .word {
+    font-family: var(--font-display);
+    font-size: 42px;
+    font-weight: 600;
+    color: var(--primary);
+    display: block;
+    margin-bottom: 8px;
+  }
+  .word-card .word-hint {
+    font-family: var(--font-body);
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--secondary);
+  }
+
+  /* ── Celebrity Aesthetic ──────────────────────────────────── */
+  .pullquote {
+    border-left: 4px solid var(--primary);
+    padding: 32px 40px;
+    background: white;
+    border-radius: 0 var(--radius) var(--radius) 0;
+    margin-bottom: 32px;
+  }
+  .pullquote .quote-text {
+    font-family: var(--font-display);
+    font-size: 28px;
+    font-weight: 300;
+    font-style: italic;
+    line-height: 1.4;
+    color: var(--on-surface);
+    margin-bottom: 16px;
+  }
+  .pullquote .quote-attr {
+    font-family: var(--font-body);
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--primary);
+    opacity: 0.7;
+  }
+  .signals-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-top: 24px;
+  }
+  .signal-card {
+    background: var(--surface);
+    border-radius: var(--radius);
+    padding: 24px;
+    border: 1px solid var(--accent);
+  }
+  .signal-card .signal-name {
+    font-family: var(--font-display);
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--primary);
+    margin-bottom: 8px;
+  }
+  .signal-card .signal-desc {
+    font-family: var(--font-body);
+    font-size: 13px;
+    color: var(--on-surface);
+    opacity: 0.75;
+    line-height: 1.6;
+  }
+
+  /* ── Target Customer ──────────────────────────────────────── */
+  .customer-card {
+    background: white;
+    border-radius: var(--radius);
+    padding: 40px;
+    border: 1px solid var(--accent);
+    margin-bottom: 24px;
+  }
+  .customer-quote {
+    font-family: var(--font-display);
+    font-size: 24px;
+    font-weight: 300;
+    font-style: italic;
+    line-height: 1.5;
+    color: var(--on-surface);
+    margin-bottom: 24px;
+  }
+  .tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  .tag {
+    background: var(--primary);
+    color: var(--on-primary);
+    font-family: var(--font-body);
+    font-size: 11px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    padding: 6px 14px;
+    border-radius: 99px;
+  }
+
+  /* ── Inspiration URLs ─────────────────────────────────────── */
+  .url-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 16px;
+  }
+  .url-card {
+    background: white;
+    border: 1px solid var(--accent);
+    border-radius: var(--radius);
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .url-card .url-domain {
+    font-family: var(--font-display);
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--on-surface);
+  }
+  .url-card a {
+    font-family: var(--font-body);
+    font-size: 12px;
+    color: var(--primary);
+    text-decoration: none;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    border: 1px solid var(--primary);
+    padding: 6px 14px;
+    border-radius: 6px;
+    align-self: flex-start;
+    transition: background 0.2s, color 0.2s;
+  }
+  .url-card a:hover {
+    background: var(--primary);
+    color: white;
+  }
+
+  /* ── Before/After Diff ────────────────────────────────────── */
+  .diff-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: var(--font-body);
+    font-size: 13px;
+  }
+  .diff-table th {
+    background: var(--primary);
+    color: white;
+    padding: 14px 20px;
+    text-align: left;
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-weight: 400;
+  }
+  .diff-table th:first-child { border-radius: var(--radius) 0 0 0; }
+  .diff-table th:last-child  { border-radius: 0 var(--radius) 0 0; }
+  .diff-table td {
+    padding: 16px 20px;
+    border-bottom: 1px solid var(--accent);
+    vertical-align: top;
+    line-height: 1.5;
+  }
+  .diff-table tr:last-child td { border-bottom: none; }
+  .diff-table tr:nth-child(even) td { background: rgba(255,255,255,0.6); }
+  .diff-table .field-name {
+    font-weight: 700;
+    color: var(--primary);
+    white-space: nowrap;
+    width: 160px;
+  }
+  .diff-table .old-val { color: #999; text-decoration: line-through; font-style: italic; }
+  .diff-table .new-val { color: var(--on-surface); }
+
+  /* ── Print ────────────────────────────────────────────────── */
+  @media print {
+    .no-print { display: none; }
+    .cover { min-height: 100vh; }
+    .section { page-break-before: always; }
+    body { background: white; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ── 1. Cover ─────────────────────────────────────────────── -->
+<div class="cover">
+  <p class="eyebrow">Prepared by Raspucat</p>
+  <h1>Two Shades<br>of Travel</h1>
+  <p class="subtitle">Brand Brief</p>
+  <div class="divider"></div>
+  <p class="meta">May 2026</p>
+</div>
+
+<!-- ── 2. Business Identity ─────────────────────────────────── -->
+<div class="section">
+  <p class="section-label">Section 01</p>
+  <h2 class="section-title">Business Identity</h2>
+  <div class="identity-card">
+    <span class="biz-type">Family Travel Blog &amp; Content Brand</span>
+    <span class="biz-name">Two Shades<br>of Travel</span>
+    <span class="biz-desc">twoshadesoftravel.com &nbsp;·&nbsp; Liberty Hill, TX</span>
+  </div>
+</div>
+
+<!-- ── 3. Brand Feeling ──────────────────────────────────────── -->
+<div class="section">
+  <p class="section-label">Section 02</p>
+  <h2 class="section-title">Brand Feeling</h2>
+  <div class="words-grid">
+    <div class="word-card">
+      <span class="word">Curious</span>
+      <span class="word-hint">Discover &amp; Wonder</span>
+    </div>
+    <div class="word-card">
+      <span class="word">Adventurous</span>
+      <span class="word-hint">Bold &amp; Unafraid</span>
+    </div>
+    <div class="word-card">
+      <span class="word">Warm</span>
+      <span class="word-hint">Inviting &amp; Human</span>
+    </div>
+  </div>
+</div>
+
+<!-- ── 4. Celebrity Aesthetic ────────────────────────────────── -->
+<div class="section">
+  <p class="section-label">Section 03</p>
+  <h2 class="section-title">Celebrity Aesthetic</h2>
+  <div class="pullquote">
+    <p class="quote-text">"Anthony Bourdain meets Keke Palmer"</p>
+    <p class="quote-attr">Creative Direction Reference</p>
+  </div>
+  <div class="signals-grid">
+    <div class="signal-card">
+      <p class="signal-name">Anthony Bourdain</p>
+      <p class="signal-desc">Raw authenticity. Gritty, real-world travel photography. No filters, no tourist traps. Documentary-style storytelling that makes you feel like you're actually there — street-level, honest, unpolished in the best way.</p>
+    </div>
+    <div class="signal-card">
+      <p class="signal-name">Keke Palmer</p>
+      <p class="signal-desc">Vibrant energy. Unapologetic cultural pride. Bold color moments paired with genuine warmth. She makes people feel included, not talked down to — equal parts fun and substantive.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ── 5. Target Customer ────────────────────────────────────── -->
+<div class="section">
+  <p class="section-label">Section 04</p>
+  <h2 class="section-title">Target Customer</h2>
+  <div class="customer-card">
+    <p class="customer-quote">"Millennial parents aged 30–45 who want to expose their kids to the world but feel overwhelmed by where to start."</p>
+    <div class="tags">
+      <span class="tag">Ages 30–45</span>
+      <span class="tag">Millennial Parents</span>
+      <span class="tag">Family-First</span>
+      <span class="tag">Overwhelmed Planners</span>
+      <span class="tag">World-Curious</span>
+      <span class="tag">First-Time Family Travelers</span>
+      <span class="tag">Seek Trusted Voices</span>
+      <span class="tag">Budget-Conscious Adventures</span>
+    </div>
+  </div>
+</div>
+
+<!-- ── 6. Inspiration URLs ───────────────────────────────────── -->
+<div class="section">
+  <p class="section-label">Section 05</p>
+  <h2 class="section-title">Inspiration Sites</h2>
+  <div class="url-grid">
+    <div class="url-card">
+      <span class="url-domain">jeskojets.com</span>
+      <a href="https://jeskojets.com/" target="_blank">Visit →</a>
+    </div>
+    <div class="url-card">
+      <span class="url-domain">eaglesnest.sergesyutkin.com</span>
+      <a href="https://eaglesnest.sergesyutkin.com/" target="_blank">Visit →</a>
+    </div>
+    <div class="url-card">
+      <span class="url-domain">chaniatourism.gr</span>
+      <a href="https://www.chaniatourism.gr/" target="_blank">Visit →</a>
+    </div>
+    <div class="url-card">
+      <span class="url-domain">snamitravel.com</span>
+      <a href="https://www.snamitravel.com/" target="_blank">Visit →</a>
+    </div>
+    <div class="url-card">
+      <span class="url-domain">calderagroup.gr</span>
+      <a href="https://www.calderagroup.gr/" target="_blank">Visit →</a>
+    </div>
+  </div>
+</div>
+
+<!-- ── 7. Before / After Diff ────────────────────────────────── -->
+<div class="section">
+  <p class="section-label">Section 06</p>
+  <h2 class="section-title">Before / After</h2>
+  <table class="diff-table">
+    <thead>
+      <tr>
+        <th>Field</th>
+        <th>Before</th>
+        <th>After</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="field-name">Business Type</td>
+        <td class="old-val">*(not set)*</td>
+        <td class="new-val">family travel blog and content brand</td>
+      </tr>
+      <tr>
+        <td class="field-name">Brand Three Words</td>
+        <td class="old-val">informative, inspirational, friendly</td>
+        <td class="new-val">Curious Adventurous Warm</td>
+      </tr>
+      <tr>
+        <td class="field-name">Celebrity Aesthetic</td>
+        <td class="old-val">anthony bourdain meets Keke Palmer</td>
+        <td class="new-val">Anthony Bourdain meets Keke Palmer — Bourdain's raw authenticity and gritty adventure + Palmer's vibrant energy and cultural pride</td>
+      </tr>
+      <tr>
+        <td class="field-name">Target Customer</td>
+        <td class="old-val">travel families, full time travelers, first time travelers</td>
+        <td class="new-val">Millennial parents aged 30–45 who want to expose their kids to the world but feel overwhelmed by where to start</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+</body>
+</html>

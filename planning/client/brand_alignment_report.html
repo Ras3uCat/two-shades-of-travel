@@ -1,0 +1,843 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Brand Alignment Report — Two Shades of Travel</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Lato:wght@300;400;700&display=swap');
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --primary:    #5A5F3C;
+    --secondary:  #C89A3D;
+    --accent:     #D8C6A8;
+    --surface:    #F2EFEA;
+    --on-surface: #111111;
+    --white:      #FFFFFF;
+    --success-bg: #EAF4ED;
+    --success:    #2E6B3E;
+    --warn-bg:    #FFF8EC;
+    --warn:       #A0720A;
+    --danger-bg:  #FDECEA;
+    --danger:     #B3261E;
+    --radius:     12px;
+    --font-display: 'Cormorant Garamond', Georgia, serif;
+    --font-body:    'Lato', system-ui, sans-serif;
+  }
+
+  body {
+    background: var(--surface);
+    color: var(--on-surface);
+    font-family: var(--font-body);
+    line-height: 1.65;
+  }
+
+  /* ── Cover ──────────────────────────────────────────────────── */
+  .cover {
+    min-height: 100vh;
+    background: var(--primary);
+    color: var(--white);
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    text-align: center;
+    padding: 60px 40px;
+    page-break-after: always;
+  }
+  .cover .eyebrow {
+    font-size: 10px; letter-spacing: 4px;
+    text-transform: uppercase; opacity: 0.5;
+    margin-bottom: 28px;
+  }
+  .cover h1 {
+    font-family: var(--font-display);
+    font-size: clamp(40px, 7vw, 76px);
+    font-weight: 300; line-height: 1.1;
+    margin-bottom: 16px;
+  }
+  .cover .subtitle {
+    font-family: var(--font-display);
+    font-size: 20px; font-style: italic;
+    opacity: 0.65; margin-bottom: 48px;
+  }
+  .cover .divider { width: 50px; height: 1px; background: rgba(255,255,255,0.25); margin: 0 auto 28px; }
+  .cover .meta { font-size: 11px; letter-spacing: 2px; text-transform: uppercase; opacity: 0.4; }
+
+  /* ── Lens bar ───────────────────────────────────────────────── */
+  .lens-bar {
+    background: var(--on-surface);
+    color: var(--white);
+    padding: 28px 48px;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 24px;
+  }
+  .lens-item .lens-label {
+    font-size: 9px; letter-spacing: 3px;
+    text-transform: uppercase; opacity: 0.45;
+    margin-bottom: 6px;
+  }
+  .lens-item .lens-value {
+    font-family: var(--font-display);
+    font-size: 17px; font-weight: 300;
+    line-height: 1.4;
+  }
+
+  /* ── Section ────────────────────────────────────────────────── */
+  .section {
+    max-width: 980px;
+    margin: 0 auto;
+    padding: 72px 40px;
+    page-break-before: always;
+  }
+  .section-label {
+    font-size: 10px; letter-spacing: 4px;
+    text-transform: uppercase; color: var(--primary);
+    opacity: 0.55; margin-bottom: 10px;
+  }
+  .section-title {
+    font-family: var(--font-display);
+    font-size: 36px; font-weight: 400;
+    border-bottom: 1px solid var(--accent);
+    padding-bottom: 18px; margin-bottom: 36px;
+  }
+  .section-intro {
+    font-size: 15px; color: #444;
+    max-width: 680px; margin-bottom: 32px; line-height: 1.7;
+  }
+
+  /* ── Sites analyzed strip ───────────────────────────────────── */
+  .sites-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+    gap: 14px;
+    margin-bottom: 36px;
+  }
+  .site-pill {
+    background: var(--white);
+    border: 1px solid var(--accent);
+    border-radius: var(--radius);
+    padding: 18px 16px;
+    text-align: center;
+  }
+  .site-pill .site-num {
+    font-family: var(--font-display);
+    font-size: 28px; color: var(--accent);
+    font-weight: 300; line-height: 1;
+    margin-bottom: 6px;
+  }
+  .site-pill .site-url {
+    font-size: 11px; color: var(--primary);
+    font-weight: 700; margin-bottom: 6px;
+  }
+  .site-pill .site-tone {
+    font-size: 11px; color: #666;
+  }
+  .stars { color: var(--secondary); font-size: 10px; margin-top: 4px; }
+
+  /* ── Generic table ──────────────────────────────────────────── */
+  .data-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+    margin-bottom: 28px;
+  }
+  .data-table th {
+    background: var(--primary);
+    color: var(--white);
+    padding: 12px 18px;
+    text-align: left;
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-weight: 400;
+  }
+  .data-table th:first-child { border-radius: var(--radius) 0 0 0; }
+  .data-table th:last-child  { border-radius: 0 var(--radius) 0 0; }
+  .data-table td {
+    padding: 14px 18px;
+    border-bottom: 1px solid var(--accent);
+    vertical-align: top; line-height: 1.5;
+  }
+  .data-table tr:last-child td { border-bottom: none; }
+  .data-table tr:nth-child(even) td { background: rgba(255,255,255,0.55); }
+
+  /* ── Verdict badges ─────────────────────────────────────────── */
+  .badge {
+    display: inline-block;
+    font-size: 10px; letter-spacing: 1.5px;
+    text-transform: uppercase; padding: 3px 10px;
+    border-radius: 99px; font-weight: 700;
+    white-space: nowrap;
+  }
+  .badge-keep    { background: var(--success-bg); color: var(--success); }
+  .badge-change  { background: var(--warn-bg);    color: var(--warn); }
+  .badge-flag    { background: var(--danger-bg);  color: var(--danger); }
+
+  /* ── Score ring ─────────────────────────────────────────────── */
+  .score-block {
+    display: flex; align-items: center; gap: 32px;
+    background: var(--white);
+    border: 1px solid var(--accent);
+    border-radius: var(--radius);
+    padding: 32px 40px;
+    margin-bottom: 28px;
+  }
+  .score-ring {
+    width: 90px; height: 90px; flex-shrink: 0;
+    border-radius: 50%;
+    background: conic-gradient(var(--primary) 0% 80%, var(--accent) 80% 100%);
+    display: flex; align-items: center; justify-content: center;
+    position: relative;
+  }
+  .score-ring::after {
+    content: '';
+    width: 66px; height: 66px;
+    background: var(--white);
+    border-radius: 50%;
+    position: absolute;
+  }
+  .score-num {
+    font-family: var(--font-display);
+    font-size: 26px; font-weight: 600;
+    color: var(--primary); position: relative; z-index: 1;
+  }
+  .score-body .score-label {
+    font-size: 10px; letter-spacing: 3px;
+    text-transform: uppercase; color: var(--primary); opacity: 0.6;
+    margin-bottom: 6px;
+  }
+  .score-body p { font-size: 14px; color: #444; line-height: 1.6; }
+
+  /* ── Section order visual ───────────────────────────────────── */
+  .section-flow {
+    display: flex; flex-wrap: wrap; align-items: center; gap: 8px;
+    margin: 24px 0;
+  }
+  .flow-chip {
+    background: var(--primary);
+    color: var(--white);
+    font-size: 11px; letter-spacing: 1px;
+    text-transform: uppercase; padding: 7px 14px;
+    border-radius: 6px;
+  }
+  .flow-chip.new-chip {
+    background: var(--secondary);
+  }
+  .flow-arrow {
+    color: var(--accent); font-size: 14px;
+  }
+
+  /* ── Insight cards (Blueprint) ──────────────────────────────── */
+  .insight-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+    gap: 18px;
+  }
+  .insight-card {
+    background: var(--white);
+    border: 1px solid var(--accent);
+    border-radius: var(--radius);
+    padding: 28px;
+  }
+  .insight-card .ic-icon { font-size: 26px; margin-bottom: 10px; }
+  .insight-card .ic-title {
+    font-family: var(--font-display);
+    font-size: 20px; font-weight: 600;
+    color: var(--primary); margin-bottom: 14px;
+  }
+  .insight-card ul { list-style: none; padding: 0; }
+  .insight-card ul li {
+    font-size: 13px; padding: 5px 0;
+    border-bottom: 1px solid var(--surface);
+    display: flex; gap: 8px; align-items: flex-start; line-height: 1.5;
+  }
+  .insight-card ul li:last-child { border-bottom: none; }
+  .insight-card ul li::before { content: '→'; color: var(--secondary); flex-shrink: 0; margin-top: 1px; }
+
+  /* ── Flutter vocab table ────────────────────────────────────── */
+  .mono { font-family: 'Courier New', monospace; font-size: 12px; background: var(--surface); padding: 2px 6px; border-radius: 4px; }
+
+  /* ── Conflict/gap cards ─────────────────────────────────────── */
+  .conflict-card {
+    border-radius: var(--radius);
+    padding: 28px 32px;
+    margin-bottom: 18px;
+  }
+  .conflict-card.flag  { background: var(--danger-bg);  border-left: 4px solid var(--danger); }
+  .conflict-card.warn  { background: var(--warn-bg);    border-left: 4px solid var(--secondary); }
+  .conflict-card.info  { background: var(--success-bg); border-left: 4px solid var(--success); }
+  .conflict-card .cc-label {
+    font-size: 10px; letter-spacing: 3px;
+    text-transform: uppercase; font-weight: 700;
+    margin-bottom: 8px;
+  }
+  .conflict-card.flag .cc-label  { color: var(--danger); }
+  .conflict-card.warn .cc-label  { color: var(--warn); }
+  .conflict-card.info .cc-label  { color: var(--success); }
+  .conflict-card .cc-title { font-family: var(--font-display); font-size: 22px; font-weight: 600; margin-bottom: 10px; }
+  .conflict-card .cc-body  { font-size: 13px; color: #444; line-height: 1.65; }
+  .conflict-card .cc-resolution {
+    margin-top: 12px; padding-top: 12px;
+    border-top: 1px solid rgba(0,0,0,0.08);
+    font-size: 13px; font-weight: 700;
+  }
+
+  /* ── Diff block ─────────────────────────────────────────────── */
+  .diff-block {
+    background: #1A1A1A;
+    color: #E8E8E8;
+    border-radius: var(--radius);
+    padding: 32px 36px;
+    font-family: 'Courier New', monospace;
+    font-size: 13px;
+    line-height: 1.8;
+    margin-bottom: 28px;
+  }
+  .diff-block .diff-remove { color: #F28B82; }
+  .diff-block .diff-add    { color: #81C995; }
+  .diff-block .diff-comment { color: #888; font-style: italic; }
+
+  /* ── Summary CTA ────────────────────────────────────────────── */
+  .summary-box {
+    background: var(--primary);
+    color: var(--white);
+    border-radius: var(--radius);
+    padding: 48px;
+    text-align: center;
+    margin-top: 48px;
+  }
+  .summary-box h3 {
+    font-family: var(--font-display);
+    font-size: 36px; font-weight: 300;
+    margin-bottom: 16px;
+  }
+  .summary-box p { font-size: 14px; opacity: 0.7; max-width: 520px; margin: 0 auto 28px; line-height: 1.7; }
+  .summary-box .next-steps {
+    display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;
+  }
+  .summary-box .step-chip {
+    background: rgba(255,255,255,0.12);
+    border: 1px solid rgba(255,255,255,0.25);
+    border-radius: 8px;
+    padding: 10px 20px;
+    font-size: 12px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+
+  /* ── Print ──────────────────────────────────────────────────── */
+  @media print {
+    .no-print { display: none; }
+    body { background: white; }
+    .section { page-break-before: always; }
+    .cover { min-height: 100vh; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ── Cover ────────────────────────────────────────────────── -->
+<div class="cover">
+  <p class="eyebrow">Prepared by Raspucat · May 2026</p>
+  <h1>Brand Alignment<br>Report</h1>
+  <p class="subtitle">Two Shades of Travel</p>
+  <div class="divider"></div>
+  <p class="meta">Phase 0.1 — Inspiration Analysis · 5 Sites Reviewed</p>
+</div>
+
+<!-- ── Interpretive Lens ─────────────────────────────────────── -->
+<div class="lens-bar">
+  <div class="lens-item">
+    <div class="lens-label">Brand Three Words</div>
+    <div class="lens-value">Curious · Adventurous · Warm</div>
+  </div>
+  <div class="lens-item">
+    <div class="lens-label">Celebrity Aesthetic</div>
+    <div class="lens-value">Anthony Bourdain meets Keke Palmer</div>
+  </div>
+  <div class="lens-item">
+    <div class="lens-label">Target Customer</div>
+    <div class="lens-value">Millennial parents 30–45, overwhelmed by where to start</div>
+  </div>
+  <div class="lens-item">
+    <div class="lens-label">Current Personality</div>
+    <div class="lens-value">Creative · Full-bleed Hero</div>
+  </div>
+</div>
+
+<!-- ── Sites Analyzed ────────────────────────────────────────── -->
+<div class="section">
+  <p class="section-label">Overview</p>
+  <h2 class="section-title">Sites Analyzed</h2>
+  <div class="sites-grid">
+    <div class="site-pill">
+      <div class="site-num">01</div>
+      <div class="site-url">jeskojets.com</div>
+      <div class="site-tone">Ultra-luxury aviation</div>
+      <div class="stars">★★★★★</div>
+    </div>
+    <div class="site-pill">
+      <div class="site-num">02</div>
+      <div class="site-url">eaglesnest.<br>sergesyutkin.com</div>
+      <div class="site-tone">Wellness retreat</div>
+      <div class="stars">★★★☆☆</div>
+    </div>
+    <div class="site-pill">
+      <div class="site-num">03</div>
+      <div class="site-url">chaniatourism.gr</div>
+      <div class="site-tone">Cultural tourism</div>
+      <div class="stars">★★☆☆☆</div>
+    </div>
+    <div class="site-pill">
+      <div class="site-num">04</div>
+      <div class="site-url">snamitravel.com</div>
+      <div class="site-tone">Aspirational luxury travel</div>
+      <div class="stars">★★★★☆</div>
+    </div>
+    <div class="site-pill">
+      <div class="site-num">05</div>
+      <div class="site-url">calderagroup.gr</div>
+      <div class="site-tone">Greek luxury hospitality</div>
+      <div class="stars">★★★★☆</div>
+    </div>
+  </div>
+  <div class="conflict-card warn">
+    <div class="cc-label">Note</div>
+    <div class="cc-title">Luxury skew detected</div>
+    <div class="cc-body">3 of 5 inspiration sites are high-end luxury brands. TSoT's brief is warm and accessible for beginner families — not exclusive. The analysis below separates <strong>visual craft signals</strong> (borrow these) from <strong>exclusivity signals</strong> (reject these).</div>
+  </div>
+</div>
+
+<!-- ── A. Visual Brand ───────────────────────────────────────── -->
+<div class="section">
+  <p class="section-label">Section A</p>
+  <h2 class="section-title">Visual Brand</h2>
+
+  <div class="score-block">
+    <div class="score-ring"><span class="score-num">8/10</span></div>
+    <div class="score-body">
+      <div class="score-label">Alignment Score vs. Stated Personality</div>
+      <p>Palette, fonts, and hero variant all align well with the inspiration signal. Minor flag: "creative" personality in Raspucat can skew playful — ensure implementation stays editorial and photography-driven, not whimsical.</p>
+    </div>
+  </div>
+
+  <h3 style="font-family:var(--font-display);font-size:22px;margin-bottom:16px;color:var(--primary);">Color Palette</h3>
+  <table class="data-table" style="margin-bottom:32px;">
+    <thead>
+      <tr><th>Token</th><th>Current Hex</th><th>Inspiration Signal</th><th>Verdict</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>COLOR_PRIMARY</strong></td>
+        <td><span style="display:inline-flex;align-items:center;gap:8px;"><span style="width:16px;height:16px;background:#5A5F3C;border-radius:3px;display:inline-block;"></span>#5A5F3C</span></td>
+        <td>Earth tones, nature, grounded warmth — Chania and Eagle's Nest</td>
+        <td><span class="badge badge-keep">✓ Keep</span></td>
+      </tr>
+      <tr>
+        <td><strong>COLOR_SECONDARY</strong></td>
+        <td><span style="display:inline-flex;align-items:center;gap:8px;"><span style="width:16px;height:16px;background:#C89A3D;border-radius:3px;display:inline-block;"></span>#C89A3D</span></td>
+        <td>Warm accent gold — Snami's CTA warmth signal</td>
+        <td><span class="badge badge-keep">✓ Keep</span></td>
+      </tr>
+      <tr>
+        <td><strong>COLOR_ACCENT</strong></td>
+        <td><span style="display:inline-flex;align-items:center;gap:8px;"><span style="width:16px;height:16px;background:#D8C6A8;border-radius:3px;display:inline-block;"></span>#D8C6A8</span></td>
+        <td>Neutral warmth — consistent with all 5 sites' white-space intent</td>
+        <td><span class="badge badge-keep">✓ Keep</span></td>
+      </tr>
+      <tr>
+        <td><strong>COLOR_SURFACE</strong></td>
+        <td><span style="display:inline-flex;align-items:center;gap:8px;"><span style="width:16px;height:16px;background:#F2EFEA;border:1px solid #D8C6A8;border-radius:3px;display:inline-block;"></span>#F2EFEA</span></td>
+        <td>All 5 sites prefer off-white or warm cream over pure white</td>
+        <td><span class="badge badge-keep">✓ Keep</span></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3 style="font-family:var(--font-display);font-size:22px;margin-bottom:16px;color:var(--primary);">Typography</h3>
+  <table class="data-table" style="margin-bottom:32px;">
+    <thead>
+      <tr><th>Token</th><th>Current Value</th><th>Signal</th><th>Verdict</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>FONT_PRIMARY</strong></td>
+        <td style="font-family:'Cormorant Garamond',serif;font-size:16px;">Cormorant Garamond</td>
+        <td>Inspiration sites default to utility sans-serifs. Cormorant is a deliberate elevation — sets TSoT above generic blog aesthetic. Use boldly at 48px+ in display roles only.</td>
+        <td><span class="badge badge-keep">✓ Keep</span></td>
+      </tr>
+      <tr>
+        <td><strong>FONT_SECONDARY</strong></td>
+        <td>Lato</td>
+        <td>Clean, readable sans-serif consistent with all 5 sites' body copy approach.</td>
+        <td><span class="badge badge-keep">✓ Keep</span></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3 style="font-family:var(--font-display);font-size:22px;margin-bottom:16px;color:var(--primary);">Hero Variant &amp; Personality</h3>
+  <table class="data-table">
+    <thead>
+      <tr><th>Token</th><th>Current</th><th>Signal</th><th>Verdict</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>HERO_VARIANT</strong></td>
+        <td>fullbleed</td>
+        <td>Confirmed by all 5 sites — full-bleed is non-negotiable in this visual tier</td>
+        <td><span class="badge badge-keep">✓ Keep</span></td>
+      </tr>
+      <tr>
+        <td><strong>PERSONALITY</strong></td>
+        <td>creative</td>
+        <td>Closest match to editorial/cinematic tone. Watch that implementation reads as editorial creative, not playful/whimsical.</td>
+        <td><span class="badge badge-keep">✓ Keep</span></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- ── B. Layout Patterns ─────────────────────────────────────── -->
+<div class="section">
+  <p class="section-label">Section B</p>
+  <h2 class="section-title">Layout Patterns (Cross-Site)</h2>
+
+  <h3 style="font-family:var(--font-display);font-size:22px;margin-bottom:20px;color:var(--primary);">Section Order Consensus</h3>
+  <table class="data-table" style="margin-bottom:36px;">
+    <thead>
+      <tr><th>#</th><th>Section</th><th>Sites Using</th><th>Notes</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>1</td><td><strong>Hero</strong> (full-bleed + overlay CTA)</td><td>5 / 5</td><td>Non-negotiable first position</td></tr>
+      <tr><td>2</td><td><strong>About / Brand Philosophy</strong></td><td>4 / 5</td><td>Eagle's Nest, Chania, Snami, Caldera introduce "who we are" before selling</td></tr>
+      <tr><td>3</td><td><strong>Services / Experience Pillars</strong></td><td>5 / 5</td><td>Core content categories — always post-hero</td></tr>
+      <tr><td>4</td><td><strong>Gallery / Destinations Grid</strong></td><td>4 / 5</td><td>Visual proof before trust signals</td></tr>
+      <tr><td>5</td><td><strong>Testimonials / Social Proof</strong></td><td>3 / 5</td><td>After the visual argument is made</td></tr>
+      <tr><td>6</td><td><strong>Newsletter / Email Capture</strong></td><td>5 / 5</td><td>Every site has an email mechanism — critical for content brands</td></tr>
+      <tr><td>7</td><td><strong>Blog / Journal Teaser</strong></td><td>2 / 5</td><td>Snami + Caldera — essential for a content-first brand</td></tr>
+      <tr><td>8</td><td><strong>CTA / Final Conversion</strong></td><td>5 / 5</td><td>Always closes the page</td></tr>
+      <tr><td>9</td><td><strong>FAQ</strong></td><td>1 / 5</td><td>Eagle's Nest only — accordion at bottom, lowest priority</td></tr>
+    </tbody>
+  </table>
+
+  <h3 style="font-family:var(--font-display);font-size:22px;margin-bottom:16px;color:var(--primary);">Recommended HOME_SECTIONS</h3>
+  <p style="font-size:13px;color:#555;margin-bottom:16px;">New sections highlighted in gold. Reordered vs. current.</p>
+  <div class="section-flow">
+    <span class="flow-chip">hero</span>
+    <span class="flow-arrow">›</span>
+    <span class="flow-chip">services</span>
+    <span class="flow-arrow">›</span>
+    <span class="flow-chip">gallery</span>
+    <span class="flow-arrow">›</span>
+    <span class="flow-chip">testimonials</span>
+    <span class="flow-arrow">›</span>
+    <span class="flow-chip new-chip">newsletter ✦</span>
+    <span class="flow-arrow">›</span>
+    <span class="flow-chip new-chip">blog ✦</span>
+    <span class="flow-arrow">›</span>
+    <span class="flow-chip">cta</span>
+    <span class="flow-arrow">›</span>
+    <span class="flow-chip">faq</span>
+  </div>
+  <p style="font-size:12px;color:#888;margin-top:8px;">✦ Added &nbsp;|&nbsp; Gallery moved before testimonials &nbsp;|&nbsp; FAQ moved to end</p>
+
+  <h3 style="font-family:var(--font-display);font-size:22px;margin:32px 0 16px;color:var(--primary);">Structural Motifs</h3>
+  <div class="insight-grid">
+    <div class="insight-card">
+      <div class="ic-icon">🧭</div>
+      <div class="ic-title">Navigation</div>
+      <ul>
+        <li>Transparent overlay nav — 4/5 sites</li>
+        <li>Becomes solid on scroll</li>
+        <li>Logo left · CTA button right</li>
+        <li>Hamburger on mobile</li>
+      </ul>
+    </div>
+    <div class="insight-card">
+      <div class="ic-icon">🖼️</div>
+      <div class="ic-title">Grid Density</div>
+      <ul>
+        <li>Balanced — no site is sparse or dense</li>
+        <li>2–4 column card grids for services</li>
+        <li>Full-bleed image dividers between sections</li>
+        <li>Generous white space throughout</li>
+      </ul>
+    </div>
+    <div class="insight-card">
+      <div class="ic-icon">🎠</div>
+      <div class="ic-title">Above the Fold</div>
+      <ul>
+        <li>Full-bleed hero image — all 5 sites</li>
+        <li>Headline overlay — large serif or bold sans</li>
+        <li>Single primary CTA — centered or bottom-left</li>
+        <li>No text clutter — one message only</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- ── C. Interactive Elements ───────────────────────────────── -->
+<div class="section">
+  <p class="section-label">Section C</p>
+  <h2 class="section-title">Interactive Elements</h2>
+
+  <h3 style="font-family:var(--font-display);font-size:22px;margin-bottom:16px;color:var(--primary);">Animation Libraries Detected</h3>
+  <table class="data-table" style="margin-bottom:32px;">
+    <thead>
+      <tr><th>Site</th><th>Library</th><th>Pattern</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>jeskojets.com</td><td style="color:#999;font-style:italic;">None detected</td><td>CSS transitions inferred</td></tr>
+      <tr><td>eaglesnest.sergesyutkin.com</td><td style="color:#999;font-style:italic;">None detected</td><td>CSS transitions inferred</td></tr>
+      <tr><td>chaniatourism.gr</td><td style="color:#999;font-style:italic;">None detected</td><td>Native CSS</td></tr>
+      <tr><td>snamitravel.com</td><td><strong style="color:var(--success);">AOS (Animate on Scroll)</strong></td><td>Scroll-triggered fade/slide-up on content cards</td></tr>
+      <tr><td>calderagroup.gr</td><td style="color:#999;font-style:italic;">None detected</td><td>CSS transitions inferred</td></tr>
+    </tbody>
+  </table>
+
+  <h3 style="font-family:var(--font-display);font-size:22px;margin-bottom:16px;color:var(--primary);">Element Usage</h3>
+  <table class="data-table" style="margin-bottom:32px;">
+    <thead>
+      <tr><th>Element</th><th>Count</th><th>Sites</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><strong>Carousel</strong></td><td>4 / 5</td><td>jeskojets, eaglesnest, chaniatourism, calderagroup</td></tr>
+      <tr><td><strong>Modal</strong></td><td>1 / 5</td><td>jeskojets (booking modal)</td></tr>
+      <tr><td><strong>Accordion / FAQ</strong></td><td>1 / 5</td><td>eaglesnest</td></tr>
+    </tbody>
+  </table>
+
+  <h3 style="font-family:var(--font-display);font-size:22px;margin-bottom:16px;color:var(--primary);">Flutter Animation Vocabulary</h3>
+  <table class="data-table">
+    <thead>
+      <tr><th>Inspiration Pattern</th><th>Flutter Implementation</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>AOS scroll-triggered fade-in</td>
+        <td><span class="mono">AnimationController</span> + <span class="mono">FadeTransition</span> inside <span class="mono">VisibilityDetector</span></td>
+      </tr>
+      <tr>
+        <td>Hero parallax scroll</td>
+        <td><span class="mono">CustomScrollView</span> + <span class="mono">SliverAppBar</span> with <span class="mono">FlexibleSpaceBar</span></td>
+      </tr>
+      <tr>
+        <td>Image card hover overlay</td>
+        <td><span class="mono">MouseRegion</span> + <span class="mono">AnimatedOpacity</span></td>
+      </tr>
+      <tr>
+        <td>CTA button fill transition</td>
+        <td><span class="mono">AnimatedContainer</span> with color tween</td>
+      </tr>
+      <tr>
+        <td>Destination carousel</td>
+        <td><span class="mono">PageView</span> with <span class="mono">PageController</span> + dot indicator</td>
+      </tr>
+      <tr>
+        <td>Transparent → solid nav on scroll</td>
+        <td><span class="mono">ScrollController</span> listener → <span class="mono">AnimatedContainer</span> nav background</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- ── D. Guest Flow ──────────────────────────────────────────── -->
+<div class="section">
+  <p class="section-label">Section D</p>
+  <h2 class="section-title">Guest Flow</h2>
+
+  <h3 style="font-family:var(--font-display);font-size:22px;margin-bottom:16px;color:var(--primary);">Hero CTA Observed Across Sites</h3>
+  <table class="data-table" style="margin-bottom:32px;">
+    <thead>
+      <tr><th>Site</th><th>Primary CTA</th><th>Type</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>jeskojets.com</td><td>"Book the Flight"</td><td>Transactional (modal)</td></tr>
+      <tr><td>eaglesnest.sergesyutkin.com</td><td>"Book your stay"</td><td>Transactional (external)</td></tr>
+      <tr><td>chaniatourism.gr</td><td>"DISCOVER"</td><td><strong style="color:var(--success);">Browse / Explore ← TSoT match</strong></td></tr>
+      <tr><td>snamitravel.com</td><td>"Enquire"</td><td>Lead generation</td></tr>
+      <tr><td>calderagroup.gr</td><td>"Book now"</td><td>Transactional</td></tr>
+    </tbody>
+  </table>
+
+  <p class="section-intro">For TSoT (content brand, not booking engine): the hero CTA should be browse/explore — not transactional. Chania's "DISCOVER" model is the correct reference.</p>
+  <div class="conflict-card info">
+    <div class="cc-label">Recommended Hero CTA</div>
+    <div class="cc-title">"Start Exploring"</div>
+    <div class="cc-body">Routes into the destinations/services section or a curated first-timer guide. Sets expectation that TSoT is a content brand, not a booking agent.</div>
+  </div>
+
+  <h3 style="font-family:var(--font-display);font-size:22px;margin:32px 0 16px;color:var(--primary);">Recommended Conversion Path</h3>
+  <div class="section-flow" style="flex-direction:column;align-items:flex-start;gap:0;">
+    <div style="display:flex;align-items:center;gap:12px;padding:12px 0;border-bottom:1px solid var(--accent);width:100%;">
+      <span class="flow-chip" style="min-width:120px;text-align:center;">Hero</span>
+      <span style="font-size:13px;color:#444;">"Start Exploring" → destinations section or first-timer guide</span>
+    </div>
+    <div style="display:flex;align-items:center;gap:12px;padding:12px 0;border-bottom:1px solid var(--accent);width:100%;">
+      <span class="flow-chip" style="min-width:120px;text-align:center;">Services</span>
+      <span style="font-size:13px;color:#444;">Browse by destination region or traveler type (First Timer / Weekend Warrior / Full-Time Family)</span>
+    </div>
+    <div style="display:flex;align-items:center;gap:12px;padding:12px 0;border-bottom:1px solid var(--accent);width:100%;">
+      <span class="flow-chip" style="min-width:120px;text-align:center;">Gallery</span>
+      <span style="font-size:13px;color:#444;">Visual proof of real family travel — real faces, real destinations</span>
+    </div>
+    <div style="display:flex;align-items:center;gap:12px;padding:12px 0;border-bottom:1px solid var(--accent);width:100%;">
+      <span class="flow-chip" style="min-width:120px;text-align:center;">Testimonials</span>
+      <span style="font-size:13px;color:#444;">Social validation after the visual argument is made</span>
+    </div>
+    <div style="display:flex;align-items:center;gap:12px;padding:12px 0;border-bottom:1px solid var(--accent);width:100%;">
+      <span class="flow-chip new-chip" style="min-width:120px;text-align:center;">Newsletter ✦</span>
+      <span style="font-size:13px;color:#444;"><strong>Primary conversion moment</strong> — "Get our free First International Trip with Kids guide"</span>
+    </div>
+    <div style="display:flex;align-items:center;gap:12px;padding:12px 0;border-bottom:1px solid var(--accent);width:100%;">
+      <span class="flow-chip new-chip" style="min-width:120px;text-align:center;">Blog ✦</span>
+      <span style="font-size:13px;color:#444;">Keep them in the ecosystem — content discovery loop</span>
+    </div>
+    <div style="display:flex;align-items:center;gap:12px;padding:12px 0;width:100%;">
+      <span class="flow-chip" style="min-width:120px;text-align:center;">CTA</span>
+      <span style="font-size:13px;color:#444;">"Ready to plan? Let's talk" — consulting/trip planning upsell</span>
+    </div>
+  </div>
+
+  <h3 style="font-family:var(--font-display);font-size:22px;margin:32px 0 16px;color:var(--primary);">Trust Signals Before CTA</h3>
+  <div class="insight-grid">
+    <div class="insight-card">
+      <div class="ic-icon">👤</div>
+      <div class="ic-title">Named Family</div>
+      <ul>
+        <li>Snami names founders (Manolis &amp; Ioannis)</li>
+        <li>Eagle's Nest names the full team</li>
+        <li>TSoT: put the family front and center — names, kids' ages, years traveling</li>
+      </ul>
+    </div>
+    <div class="insight-card">
+      <div class="ic-icon">🔢</div>
+      <div class="ic-title">Credentials in Numbers</div>
+      <ul>
+        <li>Jesko Jets: 5,000+ missions · 150+ countries</li>
+        <li>TSoT: add a counter strip — countries visited, trips taken, years of family travel</li>
+        <li>Even modest numbers outperform no numbers</li>
+      </ul>
+    </div>
+    <div class="insight-card">
+      <div class="ic-icon">⭐</div>
+      <div class="ic-title">Review Quotes</div>
+      <ul>
+        <li>Eagle's Nest shows 5-star reviews before the booking link</li>
+        <li>Snami: 5 professional testimonials above the fold</li>
+        <li>TSoT: show family reader quotes before the newsletter capture</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- ── E. Conflicts & Gaps ───────────────────────────────────── -->
+<div class="section">
+  <p class="section-label">Section E</p>
+  <h2 class="section-title">Conflicts &amp; Gaps</h2>
+
+  <div class="conflict-card flag">
+    <div class="cc-label">Conflict</div>
+    <div class="cc-title">Luxury inspiration vs. accessible brand positioning</div>
+    <div class="cc-body">3 of 5 inspiration sites (jeskojets, snamitravel, calderagroup) are high-end luxury brands — dark palettes, minimal copy, price-agnostic, exclusive tone. TSoT serves overwhelmed Millennial parents who need warmth and accessibility, not gatekeeping.</div>
+    <div class="cc-resolution">Resolution: Borrow visual craft (full-bleed photography, editorial type, generous white space). Reject exclusivity signals (dark backgrounds, opaque pricing, elite-only language). The Warm brief word and Keke Palmer's inclusive energy are the tiebreakers.</div>
+  </div>
+
+  <div class="conflict-card warn">
+    <div class="cc-label">Conflict</div>
+    <div class="cc-title">"Creative" personality implementation risk</div>
+    <div class="cc-body">Raspucat's "creative" personality can render with rounded bubbles, bright illustrations, or playful animations. The inspiration sites are cinematic and editorial — not playful. Ensure AntiGravity reads this as <em>editorial creative</em>, not <em>fun/playful creative</em>.</div>
+    <div class="cc-resolution">Resolution: No illustrations, no rounded cartoon-style elements. Photography as the design. Typography as the art direction. Animations are subtle fades and parallax, not bounces or pops.</div>
+  </div>
+
+  <h3 style="font-family:var(--font-display);font-size:22px;margin:32px 0 16px;color:var(--primary);">Modules in client.json — Not in Inspiration Sites</h3>
+  <table class="data-table" style="margin-bottom:32px;">
+    <thead>
+      <tr><th>Module</th><th>Status</th><th>Recommendation</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>shop</strong></td>
+        <td><span class="badge badge-flag">0 / 5 sites</span></td>
+        <td>None of the 5 inspiration sites feature a shop. Premature for a content-first brand at launch. Consider disabling until a content audience is established.</td>
+      </tr>
+      <tr>
+        <td><strong>booking</strong></td>
+        <td><span class="badge badge-flag">0 / 5 sites</span></td>
+        <td>Inspiration sites that book use external links (Booking.com, WhatsApp). TSoT is a content brand — consider replacing with a "trip planning inquiry" contact form rather than a full booking module.</td>
+      </tr>
+      <tr>
+        <td><strong>auth</strong></td>
+        <td><span class="badge badge-change">Review</span></td>
+        <td>None of the inspiration sites require login to browse content. Keep auth in MODULES but ensure all content is publicly accessible — no login walls on destination guides or blog posts.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3 style="font-family:var(--font-display);font-size:22px;margin-bottom:16px;color:var(--primary);">Missing from HOME_SECTIONS — Appear in Inspiration Sites</h3>
+  <table class="data-table">
+    <thead>
+      <tr><th>Section</th><th>Sites Using</th><th>Recommendation</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Newsletter / email capture</strong></td>
+        <td>5 / 5</td>
+        <td>Already in MODULES — must be added to HOME_SECTIONS. This is the #1 content brand asset.</td>
+      </tr>
+      <tr>
+        <td><strong>Blog / journal teaser</strong></td>
+        <td>2 / 5</td>
+        <td>Already in MODULES — must appear in HOME_SECTIONS for a content-first brand. 3 recent articles minimum.</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- ── Diff ──────────────────────────────────────────────────── -->
+<div class="section">
+  <p class="section-label">Recommended Changes</p>
+  <h2 class="section-title">client.json Diff</h2>
+  <p class="section-intro">Only fields where the recommendation differs from the current value. All color, font, personality, and hero_variant settings are confirmed correct — no changes needed.</p>
+
+  <div class="diff-block">
+    <span class="diff-comment">// execution/frontend/app/client.json</span><br><br>
+    <span class="diff-remove">- "HOME_SECTIONS": "hero,services,testimonials,gallery,faq,cta",</span><br>
+    <span class="diff-add">+ "HOME_SECTIONS": "hero,services,gallery,testimonials,newsletter,blog,cta,faq",</span><br><br>
+    <span class="diff-remove">- "NAV_STYLE": "FILL_IN",</span><br>
+    <span class="diff-add">+ "NAV_STYLE": "transparent",</span>
+  </div>
+
+  <table class="data-table">
+    <thead>
+      <tr><th>Field</th><th>Change</th><th>Why</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>HOME_SECTIONS</strong></td>
+        <td>Reorder + add newsletter + add blog</td>
+        <td>4/5 sites put gallery before testimonials; all 5 sites email-capture; blog is critical for content brand homepage presence</td>
+      </tr>
+      <tr>
+        <td><strong>NAV_STYLE</strong></td>
+        <td>FILL_IN → transparent</td>
+        <td>4/5 inspiration sites use transparent overlay nav that becomes solid on scroll — dominant pattern at this visual tier</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="summary-box" style="margin-top:48px;">
+    <h3>Brand direction confirmed.</h3>
+    <p>The palette, fonts, hero variant, and personality are all well-aligned. Make the two config changes above, then run <strong>/build</strong> to push these findings into the Flutter implementation.</p>
+    <div class="next-steps">
+      <span class="step-chip">1. Update client.json</span>
+      <span class="step-chip">2. Run /build</span>
+      <span class="step-chip">3. AntiGravity — editorial creative</span>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
