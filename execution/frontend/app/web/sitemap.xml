@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Replace CLIENT_URL with the client's live domain (no trailing slash).
+  Remove or comment out any <url> blocks for modules that are not enabled.
+  For blog posts, add one <url> per published post after launch.
+-->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+  <!-- Always-on pages -->
+  <url>
+    <loc>CLIENT_URL/</loc>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>CLIENT_URL/contact</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- booking module -->
+  <url>
+    <loc>CLIENT_URL/booking</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <!-- testimonials module -->
+  <url>
+    <loc>CLIENT_URL/testimonials</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <!-- gallery module -->
+  <url>
+    <loc>CLIENT_URL/gallery</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- faq module -->
+  <url>
+    <loc>CLIENT_URL/faq</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <!-- blog module: list page -->
+  <url>
+    <loc>CLIENT_URL/blog</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- blog module: add one entry per published post -->
+  <!-- <url>
+    <loc>CLIENT_URL/blog/your-post-slug</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url> -->
+
+</urlset>

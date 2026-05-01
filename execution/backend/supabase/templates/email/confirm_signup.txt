@@ -1,0 +1,13 @@
+Subject: Confirm your account — CLIENT_NAME
+
+Hi there,
+
+Thanks for signing up with CLIENT_NAME.
+
+Please confirm your email address by clicking the link below:
+
+{{ .ConfirmationURL }}
+
+If you didn't create an account with us, you can safely ignore this email.
+
+— The CLIENT_NAME team

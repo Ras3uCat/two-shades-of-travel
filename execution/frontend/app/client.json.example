@@ -1,0 +1,100 @@
+{
+  "COMMENT":   "Copy to client.json, fill in all values, then run ./deliver.sh",
+  "COMMENT_2": "client.json is gitignored — it contains secrets. NEVER commit it.",
+  "COMMENT_3": "All CLIENT_* tokens in web/ files are replaced automatically by prepare.sh.",
+
+  "CLIENT_NAME":   "Acme Studio",
+  "CLIENT_SLUG":   "acme-studio",
+  "SHORT_NAME":    "Acme Studio",
+
+  "BUNDLE_ID":      "com.acmestudio.app",
+  "APPLE_TEAM_ID":  "XXXXXXXXXX",
+
+  "PERSONALITY":   "luxury",
+  "HERO_VARIANT":  "fullbleed",
+  "NAV_STYLE":     "overlay",
+  "HOME_SECTIONS": "hero,services,team,testimonials,cta",
+
+  "COLOR_PRIMARY":    "C9A96E",
+  "COLOR_SECONDARY":  "1A1A2E",
+  "COLOR_ACCENT":     "E8D5B0",
+  "COLOR_SURFACE":    "0D0D0D",
+  "COLOR_ON_SURFACE": "F5F0E8",
+  "COLOR_ERROR":      "CF6679",
+
+  "FONT_PRIMARY":   "Cormorant Garamond",
+  "FONT_SECONDARY": "Inter",
+
+  "TIMEZONE":      "America/New_York",
+  "STRIPE_MODE":   "standard",
+
+  "MODULES": "home,contact,auth,booking,newsletter,crm",
+  "_COMMENT_MODULES": "Optional modules: booking,shop,blog,gallery,testimonials,faq,subscriptions,referrals,events,courses,menu,location",
+
+  "SUPABASE_URL":              "https://your-project-ref.supabase.co",
+  "SUPABASE_ANON_KEY":         "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...",
+  "SUPABASE_SERVICE_ROLE_KEY": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...",
+
+  "STRIPE_PK":         "pk_test_...",
+  "STRIPE_SECRET_KEY": "sk_test_...",
+  "_COMMENT_WEBHOOKS": "Leave empty until site is live. Register each endpoint in Stripe dashboard, copy the whsec_ signing secret, paste here, then run ./deliver.sh --skip-db --skip-build to push to Supabase.",
+  "STRIPE_WEBHOOK_SECRET":              "",
+  "STRIPE_SHOP_WEBHOOK_SECRET":         "",
+  "STRIPE_EVENTS_WEBHOOK_SECRET":       "",
+  "STRIPE_SUBSCRIPTION_WEBHOOK_SECRET": "",
+  "RESEND_KEY": "re_...",
+
+  "SITE_URL":      "https://yourclientdomain.com",
+
+  "_COMMENT_BRAND_BRIEF": "Brand brief fields — exported from Raspucat discovery form. Used by /inspo and brand-directives skill to influence site design and Flutter implementation.",
+  "BRAND_THREE_WORDS":     "",
+  "BRAND_CELEBRITY":       "",
+  "BRAND_TARGET_CUSTOMER": "",
+  "BRAND_INSPO_URLS":      [],
+  "LOGO_URL":      "https://yourclientdomain.com/logo.png",
+  "BUSINESS_NAME": "Acme Studio",
+  "FROM_EMAIL":    "hello@yourclientdomain.com",
+  "GDPR_ENABLED":         "false",
+  "GOOGLE_AUTH_ENABLED":  "false",
+  "APPLE_AUTH_ENABLED":   "false",
+  "SMS_ENABLED":          "false",
+  "INTAKE_ENABLED":       "false",
+  "LOYALTY_ENABLED":      "false",
+  "GIFT_ENABLED":         "false",
+  "WAITLIST_ENABLED":     "false",
+  "PACKAGES_ENABLED":      "false",
+  "REVIEWS_ENABLED":       "false",
+  "CLIENT_PHOTOS_ENABLED": "false",
+  "RECURRING_ENABLED":         "false",
+  "PWA_NOTIFICATIONS_ENABLED": "false",
+  "CHATBOT_ENABLED":           "false",
+  "CHATBOT_FULL":              "false",
+  "PDF_INVOICES_ENABLED":      "false",
+  "MULTI_LOCATION_ENABLED":    "false",
+  "GOOGLE_REVIEWS_ENABLED":    "false",
+  "TIP_ENABLED":               "false",
+  "DIGEST_ENABLED":            "false",
+
+  "_COMMENT_RASPUCAT": "Raspucat admin integration — fill in once per client at project start. Also required for --smoke-test (adminToken in POST body = RASPUCAT_ADMIN_TOKEN).",
+  "RASPUCAT_QUOTE_ID":    "",
+  "RASPUCAT_API":         "https://gegwqywgbgzahnftppda.supabase.co",
+  "RASPUCAT_ADMIN_TOKEN": "FILL_IN",
+
+  "INSTAGRAM_URL": "",
+  "FACEBOOK_URL":  "",
+  "TIKTOK_URL":    "",
+  "YOUTUBE_URL":   "",
+
+  "SEO_TITLE":       "Acme Studio — Luxury Hair Salon in New York City",
+  "SEO_DESCRIPTION": "Bespoke hair services in the heart of Manhattan. Book online today.",
+  "OG_IMAGE":        "https://yourclientdomain.com/og.jpg",
+
+  "PHONE":   "+12125551234",
+  "STREET":  "123 Fifth Avenue",
+  "CITY":    "New York",
+  "STATE":   "NY",
+  "ZIP":     "10001",
+  "COUNTRY": "US",
+
+  "HOURS_JSON": "[{\"@type\":\"OpeningHoursSpecification\",\"dayOfWeek\":\"Monday\",\"opens\":\"09:00\",\"closes\":\"18:00\"},{\"@type\":\"OpeningHoursSpecification\",\"dayOfWeek\":\"Tuesday\",\"opens\":\"09:00\",\"closes\":\"18:00\"},{\"@type\":\"OpeningHoursSpecification\",\"dayOfWeek\":\"Wednesday\",\"opens\":\"09:00\",\"closes\":\"18:00\"},{\"@type\":\"OpeningHoursSpecification\",\"dayOfWeek\":\"Thursday\",\"opens\":\"09:00\",\"closes\":\"18:00\"},{\"@type\":\"OpeningHoursSpecification\",\"dayOfWeek\":\"Friday\",\"opens\":\"09:00\",\"closes\":\"18:00\"},{\"@type\":\"OpeningHoursSpecification\",\"dayOfWeek\":\"Saturday\",\"opens\":\"10:00\",\"closes\":\"16:00\"}]"
+}

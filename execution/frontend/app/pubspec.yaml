@@ -1,0 +1,83 @@
+name: raspucat_client
+description: "Raspucat modular client delivery template."
+publish_to: 'none'
+version: 1.0.0+1
+
+environment:
+  sdk: '>=3.7.0 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  # State management + routing
+  get: ^4.7.2
+
+  # Backend
+  supabase_flutter: ^2.9.0
+
+  # Fonts
+  google_fonts: ^6.2.1
+
+  # Web
+  flutter_web_plugins:
+    sdk: flutter
+  url_launcher: ^6.3.1
+  url_strategy: ^0.2.0
+
+  # Images
+  cached_network_image: ^3.4.1
+  flutter_svg: ^2.0.17
+
+  # Video
+  video_player: ^2.9.5
+  chewie: ^1.9.0
+
+  # Utils
+  intl: ^0.20.2
+
+  # Native mobile
+  flutter_native_splash: ^2.4.4
+  app_links: ^6.4.0
+
+  # Charts
+  fl_chart: ^0.69.0
+
+  # Storage
+  shared_preferences: ^2.5.0
+  web: ^1.0.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^6.0.0
+  flutter_launcher_icons: ^0.14.3
+
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/images/
+    - assets/icons/
+
+# ─── Native mobile: splash screen ────────────────────────────────────────────
+# Run: dart run flutter_native_splash:create
+# color must match client.json SURFACE_COLOR (can't read dart-define at build time).
+# Replace image with client logo (PNG with transparency, centered on solid bg).
+flutter_native_splash:
+  color: "#FFFFFF"
+  image: assets/images/splash_logo.png
+  android_12:
+    color: "#FFFFFF"
+    image: assets/images/splash_logo.png
+    icon_background_color: "#FFFFFF"
+
+# ─── Native mobile: app icons ─────────────────────────────────────────────────
+# Run: dart run flutter_launcher_icons
+# image_path must be a 1024x1024 PNG. iOS requires no alpha channel.
+flutter_launcher_icons:
+  android: true
+  ios: true
+  image_path: "assets/icons/app_icon.png"
+  min_sdk_android: 21
+  web:
+    generate: false

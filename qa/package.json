@@ -1,0 +1,16 @@
+{
+  "name": "raspucat-qa",
+  "version": "1.0.0",
+  "description": "Playwright automated tests for Raspucat client sites",
+  "scripts": {
+    "test": "playwright test",
+    "test:auth": "playwright test chrome/auth_flows.spec.js",
+    "test:booking": "playwright test chrome/booking_flow.spec.js",
+    "test:admin": "playwright test chrome/admin_flows.spec.js",
+    "report": "playwright show-report"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.44.0",
+    "dotenv": "^16.4.5"
+  }
+}

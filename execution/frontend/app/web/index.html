@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <base href="$FLUTTER_BASE_HREF">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta content="IE=Edge" http-equiv="X-UA-Compatible">
+
+  <!-- SEO: replace all CLIENT_* tokens before the production build -->
+  <title>CLIENT_TITLE</title>
+  <meta name="description" content="CLIENT_DESCRIPTION">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="CLIENT_TITLE">
+  <meta property="og:description" content="CLIENT_DESCRIPTION">
+  <meta property="og:image" content="CLIENT_OG_IMAGE">
+  <meta property="og:url" content="CLIENT_URL">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="CLIENT_TITLE">
+  <meta name="twitter:description" content="CLIENT_DESCRIPTION">
+  <meta name="twitter:image" content="CLIENT_OG_IMAGE">
+
+  <!-- PWA -->
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="CLIENT_NAME">
+  <link rel="apple-touch-icon" href="icons/Icon-192.png">
+  <link rel="icon" type="image/png" href="favicon.png">
+  <link rel="manifest" href="manifest.json">
+
+  <!-- LocalBusiness Structured Data (JSON-LD) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "name": "CLIENT_NAME",
+    "description": "CLIENT_DESCRIPTION",
+    "url": "CLIENT_URL",
+    "telephone": "CLIENT_PHONE",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "CLIENT_STREET",
+      "addressLocality": "CLIENT_CITY",
+      "addressRegion": "CLIENT_STATE",
+      "postalCode": "CLIENT_ZIP",
+      "addressCountry": "CLIENT_COUNTRY"
+    },
+    "openingHoursSpecification": CLIENT_HOURS_JSON,
+    "image": "CLIENT_OG_IMAGE"
+  }
+  </script>
+
+  <!-- Loading screen — shown until Flutter renders its first frame.
+       CLIENT_COLOR_SURFACE: replace with 6-char hex (e.g. 0D0D0D) — no # needed here.
+       CLIENT_COLOR_PRIMARY:  replace with 6-char hex (e.g. C9A96E) — no # needed here. -->
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      background-color: #CLIENT_COLOR_SURFACE;
+    }
+    #flutter-loader {
+      position: fixed;
+      inset: 0;
+      background-color: #CLIENT_COLOR_SURFACE;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 99999;
+      transition: opacity 0.35s ease;
+    }
+    #flutter-loader.hidden {
+      opacity: 0;
+      pointer-events: none;
+    }
+    .loader-ring {
+      width: 44px;
+      height: 44px;
+      border: 2px solid rgba(255, 255, 255, 0.08);
+      border-top-color: #CLIENT_COLOR_PRIMARY;
+      border-radius: 50%;
+      animation: loader-spin 0.8s linear infinite;
+    }
+    @keyframes loader-spin {
+      to { transform: rotate(360deg); }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Loading screen: hidden on flutter-first-frame event -->
+  <div id="flutter-loader">
+    <div class="loader-ring"></div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════════════════════
+       ANALYTICS — GDPR-gated.
+       When GDPR is disabled: paste your analytics snippet directly here and
+         it will fire for all visitors.
+       When GDPR is enabled: paste your snippet inside window.enableAnalytics()
+         below. It will only fire after the user clicks "Accept" in the cookie
+         banner. The Flutter GdprController calls window.enableAnalytics() on
+         consent.
+
+       Example GA4 snippet (inside enableAnalytics body):
+         var s = document.createElement('script');
+         s.src = 'https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX';
+         s.async = true;
+         document.head.appendChild(s);
+         window.dataLayer = window.dataLayer || [];
+         function gtag(){dataLayer.push(arguments);}
+         window.gtag = gtag;
+         gtag('js', new Date());
+         gtag('config', 'G-XXXXXXXXXX');
+       ═══════════════════════════════════════════════════════════════════════ -->
+  <script>
+    window._analyticsEnabled = false;
+    window.enableAnalytics = function () {
+      if (window._analyticsEnabled) return;
+      window._analyticsEnabled = true;
+      // ── Paste GDPR-gated analytics snippet here ──────────────────────────
+
+      // ─────────────────────────────────────────────────────────────────────
+    };
+  </script>
+
+  <script>
+    // Force HTML renderer for SEO-indexable DOM output (ADR-008)
+    window.flutterConfiguration = { renderer: "html" };
+
+    // Dismiss the loading screen once Flutter renders its first frame.
+    // flutter-first-frame is fired by the Flutter engine on web after initial paint.
+    window.addEventListener('flutter-first-frame', function () {
+      var loader = document.getElementById('flutter-loader');
+      if (loader) {
+        loader.classList.add('hidden');
+        setTimeout(function () { loader.remove(); }, 400);
+      }
+    });
+  </script>
+  <script src="flutter_bootstrap.js" async></script>
+</body>
+</html>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <!-- Universal Links for deep link handling (Stripe redirect, universal links).  -->
+    <!-- DELIVERY: replace YOUR_APP_DOMAIN with the client's domain.                 -->
+    <!-- Then register this file in Xcode: Runner target → Signing & Capabilities    -->
+    <!-- → + Capability → Associated Domains, OR manually set                        -->
+    <!-- CODE_SIGN_ENTITLEMENTS = Runner/Runner.entitlements in project.pbxproj.     -->
+    <key>com.apple.developer.associated-domains</key>
+    <array>
+        <string>applinks:YOUR_APP_DOMAIN</string>
+    </array>
+</dict>
+</plist>

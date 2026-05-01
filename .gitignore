@@ -1,0 +1,13 @@
+build/
+.dart_tool/
+
+# Claude local config (personal preferences + credentials)
+CLAUDE.local.md
+.claude/settings.local.json
+
+# QA secrets and dependencies
+qa/.env
+qa/node_modules/
+qa/reports/playwright/
+qa/test-results/
+
